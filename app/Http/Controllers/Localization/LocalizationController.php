@@ -3,12 +3,28 @@
 namespace App\Http\Controllers\Localization;
 
 use App\Http\Controllers\Controller;
+use App\Services\LocalizationService;
 use Illuminate\Http\Request;
 
 class LocalizationController extends Controller
-{
-    public function getCitys(Request $request)
+{   
+    public $localizationService;
+
+    public function __construct(LocalizationService $localizationService)
     {
-        dd($request->all());
+        $this->localizationService = $localizationService;
+    }
+
+
+    public function getAllCitys(Request $request)
+    {
+        return $this->localizationService->getAllCitys($request->stateId);
+
+    }
+
+    public function getAllStates(Request $request)
+    {
+        return $this->localizationService->getAllStates();
+
     }
 }

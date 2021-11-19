@@ -8,10 +8,23 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class LocalizationService
 {
-    public static function getStates()
+    public function getAllStates()
     {
         try {
-            return Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/');
+            $states = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/');
+            return $states->json();
+        } catch (ConnectException $ce) {
+            dd($ce);
+        } catch (HttpException $he) {
+            dd($he);
+        } 
+    }
+
+    public function getAllCitys($stateId)
+    {
+        try {
+            $citys = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'.$stateId.'/municipios');
+            return $citys->json();
         } catch (ConnectException $ce) {
             dd($ce);
         } catch (HttpException $he) {
