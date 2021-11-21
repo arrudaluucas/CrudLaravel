@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Criar usuário') }}</div>
+                <div class="card-header">{{ __('Editar cliente') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.store') }}">
+                    <form method="POST" action="{{ route('clients.update', $client->id) }}">
                         @csrf
 
-                        @include('user.form')
+                        @include('client.form')
 
                         @include('layouts.form-footer')
                     </form>

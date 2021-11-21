@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepository;
-use App\Services\UserService;
+use App\Http\Requests\ClientRequest;
+use App\Repositories\ClientRepository;
+use App\Services\ClientService;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
-    protected $userRepository;
-    protected $userService;
 
-    public function __construct(UserRepository $userRepository, UserService $userService)
+    protected $clientRepository;
+    protected $clientService;
+
+    public function __construct(ClientRepository $clientRepository, ClientService $clientService)
     {
         $this->middleware('auth');
-        $this->userRepository = $userRepository;
-        $this->userService = $userService;
+        $this->clientRepository = $clientRepository;
+        $this->clientService = $clientService;
     }
     /**
      * Display a listing of the resource.
@@ -26,13 +26,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        return view('client.index');
     }
 
-    public function getUsers(Request $request)
+    public function getClients(Request $request)
     {
         $request = $request->all();
-        echo json_encode($this->userService->getUsers($request));
+        echo json_encode($this->clientService->getClients($request));
     }
 
     /**
@@ -42,26 +42,27 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('client.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\UserCreateRequest  $request
+     * @param  \App\Http\Requests\ClientRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserCreateRequest $request)
+    public function store(ClientRequest $request)
     {
         $data = $request->all();
-        $create = $this->userService->create($data);
+        $create = $this->clientService->create($data);
         if ($create['error']) {
             return redirect()->back()->withErrors($create['message']);
         }
 
         return redirect()
-            ->route('users.index')
+            ->route('clients.index')
             ->with('success', $create['message']);
+
     }
 
     /**
@@ -83,27 +84,27 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->userRepository->find($id);
-        return view('user.edit', compact('user'));
+        $client = $this->clientRepository->find($id);
+        return view('client.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UserUpdateRequest  $request
+     * @param  \App\Http\Requests\ClientRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(ClientRequest $request, $id)
     {
         $data = $request->all();
-        $update = $this->userService->update($data, $id);
+        $update = $this->clientService->update($data, $id);
         if ($update['error']) {
             return redirect()->back()->withErrors($update['message']);
         }
 
         return redirect()
-            ->route('users.index')
+            ->route('clients.index')
             ->with('success', $update['message']);
     }
 
@@ -115,11 +116,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $destroy = $this->userService->destroy($id);
+        $destroy = $this->clientService->destroy($id);
         $key = $destroy['error'] ? 'error' : 'success';
 
         return redirect()
-            ->route('users.index')
+            ->route('clients.index')
             ->with($key, $destroy['message']);
     }
 }

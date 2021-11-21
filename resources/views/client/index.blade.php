@@ -6,22 +6,26 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Usuários') }}
-                    <a href="{{ route('users.create') }}" class="btn btn-success">
-                        <i class="fas fa-user-plus"></i>
+                    {{ __('Clientes') }}
+                    <a href="{{ route('clients.create') }}" class="btn btn-success">
+                        <i class="fas fa-plus-circle"></i>
                     </a>
                 </div>
                 <div class="card-body">
                     @include('layouts.filter')
-                    <table class="table table-striped table-bordered" id="usersTable">
+                    <table class="table table-striped table-bordered" id="tableClients">
                         <thead>
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Documento</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Origem</th>
                                 <th scope="col">Situação</th>
                                 <th scope="col" width='115'>Ações</th>
                             </tr>
                         </thead>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -35,7 +39,7 @@
 
         $("body").on('click', '#search', function() {
             console.log('aqui')
-            $("#usersTable").DataTable().destroy();
+            $("#tableClients").DataTable().destroy();
             dataTable({
                 searchName: $("#searchName").val(),
                 city: $("#city").val(),
@@ -47,7 +51,7 @@
     })
 
     const dataTable = (data = {}) => {
-        $("#usersTable").DataTable({
+        $("#tableClients").DataTable({
             bLengthChange: false,
             processing: true,
             serverSide: true,
@@ -59,7 +63,7 @@
                 url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/pt_pt.json"
             },
             ajax: {
-                url: '/get-users',
+                url: '/get-clients',
                 type: 'GET',
                 data: data
             }

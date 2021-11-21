@@ -18,9 +18,9 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -32,9 +32,9 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -46,9 +46,9 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -77,11 +77,8 @@
                             <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                             <div class="col-md-6">
-                                <select id="state" class="form-control" name="state" required>
+                                <select id="state" class="form-control" name="state" required onchange="getCitys()">
                                     <option value="" selected>Selecione</option>
-                                    @foreach($states as $state)
-                                        <option value="{{ $state['id'] }}">{{ $state['nome'] }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -90,7 +87,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Cidade') }}</label>
 
                             <div class="col-md-6">
-                                <select id="city" class="form-control" name="city" required onchange="getCitys()">
+                                <select id="city" class="form-control" name="city" required>
                                     <option value="" selected>Selecione</option>
                                 </select>
                             </div>
@@ -102,8 +99,8 @@
                             <div class="col-md-6">
                                 <select id="situation" class="form-control" name="situation" required>
                                     <option value="" selected>Selecione</option>
-                                    <option value="1">Inativo</option>
-                                    <option value="0">Ativo</option>
+                                    <option value="0">Inativo</option>
+                                    <option value="1">Ativo</option>
                                 </select>
                             </div>
                         </div>
@@ -121,4 +118,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('/js/localization.js') }}"></script>
 @endsection

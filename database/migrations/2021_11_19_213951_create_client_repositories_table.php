@@ -15,7 +15,7 @@ class CreateClientRepositoriesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('client', function(Blueprint $table) {
+		Schema::create('clients', function(Blueprint $table) {
             $table->increments('id');
 			$table->string('name');
             $table->integer('state');
@@ -23,6 +23,10 @@ class CreateClientRepositoriesTable extends Migration
             $table->string('phone');
             $table->integer('city');
             $table->integer('situation');
+            $table->boolean('indication');
+            $table->boolean('faceToFace');
+            $table->boolean('facebook');
+            $table->boolean('site');
 			$table->string('email')->unique();
             $table->timestamps();
 			$table->softDeletes();
