@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PasswordValidate;
 use App\Rules\ValidateCurrentPassword;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -34,7 +36,13 @@ class UserUpdateRequest extends FormRequest
         ];
 
         if ($request->get('password')) {
-            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
+            $rules['password'] = ['required', 'string', 'confirmed', PasswordValidate::min(8)
+            ->mixedCase()
+            ->letters()
+            ->numbers()
+            ->symbols()
+            ->uncompromised()
+            ];
         }
 
         return $rules;

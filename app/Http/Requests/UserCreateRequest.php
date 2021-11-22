@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PasswordValidate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class UserCreateRequest extends FormRequest
 {
@@ -26,7 +28,13 @@ class UserCreateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'confirmed', PasswordValidate::min(8)
+            ->mixedCase()
+            ->letters()
+            ->numbers()
+            ->symbols()
+            ->uncompromised()
+            ],
             'city' => ['required'],
             'state' => ['required'],
             'situation' => ['required'],

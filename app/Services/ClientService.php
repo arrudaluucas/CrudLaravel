@@ -35,7 +35,7 @@ class ClientService
                 $client->document,
                 $client->phone,
                 $this->moutOriginTd($client),
-                $client->situation,
+                $client->situation ? 'Ativo' : 'Inativo',
                 '<td>'.
                     '<a class="btn btn-primary" href="'.route("clients.edit", $client->id).'">'.
                         '<i class="fas fa-edit"></i>'.
@@ -67,10 +67,10 @@ class ClientService
         if ($client->site) {
             $origin[] = 'Site';
         }
-        if ($client->facebook) {
+        if ($client->faceToFace) {
             $origin[] = 'Boa a boca';
         }
-        if ($client->facebook) {
+        if ($client->indication) {
             $origin[] = 'Indicaçao';
         }
 
@@ -84,7 +84,7 @@ class ClientService
             $this->clientRepository->create($data);
             return [
                 'error' => false,
-                'message' => 'Client criado com sucesso!'
+                'message' => 'Cliente criado com sucesso!'
             ];
         } catch (\Throwable $th) {
             Log::error($th);
@@ -102,7 +102,7 @@ class ClientService
             $this->clientRepository->update($data, $id);
             return [
                 'error' => false,
-                'message' => 'Client atualizado com sucesso!'
+                'message' => 'Cliente atualizado com sucesso!'
             ];
         } catch (\Throwable $th) {
             Log::error($th);
@@ -119,7 +119,7 @@ class ClientService
             $this->clientRepository->delete($id);
             return [
                 'error' => false,
-                'message' => 'Client excluído com sucesso!'
+                'message' => 'Cliente excluído com sucesso!'
             ];
         } catch (\Throwable $th) {
             Log::error($th);

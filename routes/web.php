@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (!Auth::check()) {
+        return view('auth.login');
+    } else {
+        return view('home');
+    }
+    
 });
 
 Route::get('/get-citys', [LocalizationController::class, 'getAllCitys']);
@@ -33,4 +38,4 @@ Route::get('users/{id}/destroy', [UserController::class, 'destroy'])->name('user
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [ClientController::class, 'index'])->name('home');

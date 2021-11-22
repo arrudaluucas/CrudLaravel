@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UserService
@@ -20,17 +21,22 @@ class UserService
         $users = $this->userRepository->getUsers($request);
 
         foreach($users as $user) {
+            $tdDelete = '';
+            if(Auth::user()->id !== $user->id) {
+                $tdDelete = '<a class="btn btn-danger button-delete" data-id="'.$user->id.'" data-link="users">'.
+                    '<i class="fas fa-trash-alt"></i>'.
+                '</a>';
+            }
+
             $data[] = [
                 $user->name,
                 $user->email,
-                $user->situation,
+                $user->situation ? 'Ativo' : 'Inativo',
                 '<td>'.
                     '<a class="btn btn-primary" href="'.route("users.edit", $user->id).'">'.
                         '<i class="fas fa-user-edit"></i>'.
                     '</a>&nbsp'.
-                    '<a class="btn btn-danger button-delete" data-id="'.$user->id.'" data-link="users">'.
-                        '<i class="fas fa-trash-alt"></i>'.
-                    '</a>'.
+                    $tdDelete .
                 '</td>'
             ];
         }

@@ -12,6 +12,7 @@
                     </a>
                 </div>
                 <div class="card-body">
+                    @include('layouts.alerts')
                     @include('layouts.filter')
                     <table class="table table-striped table-bordered" id="tableClients">
                         <thead>
