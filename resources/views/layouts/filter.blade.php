@@ -15,7 +15,7 @@
 </div>
 <br />
 <div class="row">
-    @if(Request::url() == 'http://127.0.0.1:8000/clients')
+    @if(Request::url() == 'http://127.0.0.1:8000/clients' || Request::url() == 'http://127.0.0.1:8000/home')
         <div class="col-sm-4">
             <select id="searchOrigin" class="form-control" name="serachOrigin">
                 <option value="" selected>Selecione Origem</option>
