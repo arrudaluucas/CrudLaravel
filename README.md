@@ -14,8 +14,8 @@ Composer 1.10.1 or >
 
 Passos para execução do projeto:
 
-1 - clone o projeto em uma pasta;
-2 - Execute composer install dentro do projeto para baixar as dependencias do laravel;
+1 - clone o projeto em uma pasta;<br>
+2 - Execute composer install dentro do projeto para baixar as dependencias do laravel;<br>
 3 - crie um novo .env copiando os dados do arquivo .env-exemple. Necessário trocar o usuario e senha do banco utilizado(colocar as especificações da sua maquina local);
 4 - para o envio de email, também é necessario colocar usuario e senha no arquivo .env MAIL_USERNAME e MAIL_PASSWORD. O serviço utilizado para envio foi o mailtrap https://mailtrap.io/register/signup?ref=header. Crie um usuario, nas configurações, procure por envio smtp para php e altere as informações no .env se necessárias;
 5 - execute comando phh artisan migrate para o mesmo subir as tabelas no banco de dados, lembre-se primeiro de ja ter configurado o mesmo.
