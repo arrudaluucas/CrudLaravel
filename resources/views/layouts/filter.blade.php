@@ -27,7 +27,7 @@
         </div>
     @endif
     <div class="col-sm-4">
-        <select id="searchSituation" class="form-control" name="serachSituation">
+        <select id="searchSituation" class="form-control" name="searchSituation">
             <option value="" selected>Selecione uma situação</option>
             <option value="0">Inativo</option>
             <option value="1">Ativo</option>

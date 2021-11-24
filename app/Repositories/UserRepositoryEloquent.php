@@ -48,8 +48,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 if (isset($request['state']) && $request['state']) {
                     $where->where('state', 'like', '%' . $request['state'] . '%');
                 }
-                if (isset($request['searchSituation']) && $request['searchSituation']) {
-                    $where->where($request['searchSituation'], 1);
+                if (isset($request['searchSituation'])) {
+                    $where->where('situation', '=', $request['searchSituation']);
                 }
             })
             ->orderBy('created_at', 'desc')

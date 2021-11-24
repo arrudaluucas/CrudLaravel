@@ -42,7 +42,7 @@
                 city: $("#city").val(),
                 state: $("#state").val(),
                 searchOrigin: $("#serachOrigin").val(),
-                searchSituation: $("#serachSituation").val(),
+                searchSituation: $("#searchSituation").val(),
             })
         })
     })

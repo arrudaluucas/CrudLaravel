@@ -51,8 +51,8 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
                 if (isset($request['searchOrigin']) && $request['searchOrigin']) {
                     $where->where($request['searchOrigin'], 1);
                 }
-                if (isset($request['searchSituation']) && $request['searchSituation']) {
-                    $where->where($request['searchSituation'], 1);
+                if (isset($request['searchSituation'])) {
+                    $where->where('situation', '=', $request['searchSituation']);
                 }
             })
             ->orderBy('created_at', 'desc')
